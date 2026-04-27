@@ -3,7 +3,9 @@ import sigUpService from "../services/singUp.service.js";
 
 export default async function singUpController(req: Request, res: Response) {
     try {
-        const user = await sigUpService("dodo@gmail.com", "dodo123");
+        const { email, password } = req.body;
+        const responseSingUp = await sigUpService(email, password);
+
 
         res.json({
             success: true,

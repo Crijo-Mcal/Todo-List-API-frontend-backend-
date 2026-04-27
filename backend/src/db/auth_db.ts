@@ -1,19 +1,23 @@
-import e from "express"
 import { pool } from "./connection.js"
-import bcrypt from "bcrypt";
+import { compareHashPassword } from "../utility/bcrypt.js";
 
-const email = "querry@gmail.com";
-const password = "querry123";
+import type { Clien_Data } from "../types/bd_types.js";
 
-export default async function auth(): Promise<boolean> {
+export default async function auth(email: string, password: string): Promise<Clien_Data> {
 
-    const res = await pool.query(`SELECT * FROM client WHERE email ='${email}'`)
-    const data = res.rows[0];
+    const res = await pool.query("SELECT * FROM client WHERE email = $1", [email])
+    const data: Clien_Data | undefined = res.rows[0];
 
-    if (data.email === email) {
-        return true
+    if (!data) {
+        throw { status: 409, message: "email not exist" }
     }
 
-    return false;
+    const isPasswordMatch = await compareHashPassword(password, data.password);
+
+    if (!isPasswordMatch) {
+        throw { status: 409, message: "password not correct" }
+    }
+
+    return data;
 
 }

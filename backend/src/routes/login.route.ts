@@ -4,7 +4,7 @@ import logInController from "../controllers/login.controller.js"
 
 const route = Router()
 
-route.get('/login', logInController)
+route.post('/login', logInController)
 
 
 export default route;

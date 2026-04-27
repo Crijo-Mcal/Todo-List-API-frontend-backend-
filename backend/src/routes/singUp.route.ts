@@ -4,7 +4,7 @@ import singUpController from "../controllers/singUp.controller.js"
 
 const route = Router()
 
-route.get('/singUp', singUpController)
+route.post('/singUp', singUpController)
 
 
 export default route;

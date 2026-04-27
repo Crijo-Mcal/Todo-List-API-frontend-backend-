@@ -7,6 +7,8 @@ dotenv.config();
 const app = express();
 const poth = process.env.BACKEND_PORTH || 3000;
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send("server is running");
 })
