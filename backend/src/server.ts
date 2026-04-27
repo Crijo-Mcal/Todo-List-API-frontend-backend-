@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import login_route from "./routes/login.route.js"
 import singUp_route from "./routes/singUp.route.js"
+import globalErrorHandles from "./middleware/globalErrorHandles.js";
+
 
 dotenv.config();
 const app = express();
@@ -17,6 +19,9 @@ app.get('/', (req, res) => {
 app.use('/', login_route);
 app.use('/', singUp_route);
 
+
+/* haldle Global Error */
+app.use(globalErrorHandles)
 
 
 app.listen(poth, () => {

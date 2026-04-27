@@ -1,5 +1,7 @@
 import { pool } from "./connection.js"
 import { compareHashPassword } from "../utility/bcrypt.js";
+import { AppError } from "../utility/AppError.js"
+
 
 import type { Clien_Data } from "../types/bd_types.js";
 
@@ -9,13 +11,13 @@ export default async function auth(email: string, password: string): Promise<Cli
     const data: Clien_Data | undefined = res.rows[0];
 
     if (!data) {
-        throw { status: 409, message: "email not exist" }
+        throw new AppError("email not exist", 409)
     }
 
     const isPasswordMatch = await compareHashPassword(password, data.password);
 
     if (!isPasswordMatch) {
-        throw { status: 409, message: "password not correct" }
+        throw new AppError("password not correct", 409)
     }
 
     return data;

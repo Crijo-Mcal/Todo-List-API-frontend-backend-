@@ -1,14 +1,17 @@
 import auth from "../db/auth_db.js";
-import type { Clien_Data } from "../types/bd_types.js";
 
+import { createAccessToken, createRefreshToken } from "../utility/jwtToken.js";
+import insert_RefreshToken from "../db/insert/insert_RefreshToken.js";
 
-export default async function singUpService(email: string, password: string): Promise<Clien_Data> {
+export default async function singUpService(email: string, password: string): Promise<object> {
 
     try {
-        const data = auth(email, password)
-        return data
+        const client = await auth(email, password)
+        const AccessToken = createAccessToken(client.id, client.email);
+        const RefreshToken = createRefreshToken(client.id, client.email);
+        insert_RefreshToken(RefreshToken, client.id);
+        return { AccessToken, RefreshToken, user: { id: client.id, name: client.name, email: client.email } }
     } catch (err: any) {
-        console.error(err.message);
         throw err;
     }
 

@@ -1,15 +1,9 @@
 import { pool } from "./connection.js"
 import type { Clien_Data } from "../types/bd_types.js"
 
-export default async function singUp_db(email: string, password: string): Promise<Clien_Data> {
-
+export default async function singUp_db(name: string, email: string, password: string): Promise<void> {
     const res = await pool.query(
-        `INSERT INTO client (email,password) VALUES ($1,$2) RETURNING *`,
-        [email, password]
+        `INSERT INTO client (name,email,password) VALUES ($1,$2,$3)`,
+        [name, email, password]
     );
-
-    const data: Clien_Data = res.rows[0];
-
-    return data;
-
 }
