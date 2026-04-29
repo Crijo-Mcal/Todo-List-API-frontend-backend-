@@ -1,9 +1,14 @@
-import { pool } from "./connection.js"
-import { compareHashPassword } from "../utility/bcrypt.js";
-import { AppError } from "../utility/AppError.js"
+import { pool } from "../connection.js"
+import { compareHashPassword } from "../../utility/bcrypt.js";
+import { AppError } from "../../utility/AppError.js"
 
 
-import type { Clien_Data } from "../types/bd_types.js";
+export type Clien_Data = {
+    id: number,
+    name: string,
+    email: string,
+    password: string
+}
 
 export default async function auth(email: string, password: string): Promise<Clien_Data> {
 

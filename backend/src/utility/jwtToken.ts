@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-
+import { randomBytes } from "crypto";
 dotenv.config();
 
 const secretKey = process.env.TOKEN_SECRET_KEY;
@@ -19,16 +19,9 @@ export function createAccessToken(id: number, email: string): string {
     return token;
 }
 
-export function createRefreshToken(id: number, email: string): string {
-    if (!secretKey) {
-        throw new Error("TOKEN_SECRET_KEY is not defined in .env");
-    }
+export function createRefreshToken(): string {
 
-    const token = jwt.sign(
-        { id, email },
-        secretKey,
-        { expiresIn: "24h" }
-    );
+    const refreshToken = randomBytes(64).toString("hex");
 
-    return token;
+    return refreshToken;
 }
