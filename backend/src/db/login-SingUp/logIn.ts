@@ -16,13 +16,13 @@ export default async function auth(email: string, password: string): Promise<Cli
     const data: Clien_Data | undefined = res.rows[0];
 
     if (!data) {
-        throw new AppError("email not exist", 409)
+        throw new AppError("email not exist", "email")
     }
 
     const isPasswordMatch = await compareHashPassword(password, data.password);
 
     if (!isPasswordMatch) {
-        throw new AppError("password not correct", 409)
+        throw new AppError("password not correct", "password")
     }
 
     return data;

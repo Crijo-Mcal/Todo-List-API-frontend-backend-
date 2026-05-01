@@ -4,8 +4,8 @@ export interface User {
     email: string
 }
 
-export interface ResponseType {
-    success?: boolean,
+export interface LogInresponse {
+    success: boolean,
     typeError?: "email" | "password",
     message?: string,
     AccessToken?: string,

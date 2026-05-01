@@ -19,12 +19,12 @@ export default async function singUpService(name: string, email: string, passwor
         const RefreshToken = createRefreshToken();
 
         insert_RefreshToken(RefreshToken, client.id);
-        return { AccessToken, RefreshToken, user: { id: client.id, name: client.name, email: client.email } }
+        return { AccessToken, RefreshToken, success: true, user: { id: client.id, name: client.name, email: client.email } }
 
     } catch (err: any) {
 
         if (err.code === '23505') {
-            throw new AppError("email already used", 409)
+            throw new AppError("email already used", email)
         }
         throw err
     }

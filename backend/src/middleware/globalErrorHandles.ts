@@ -5,6 +5,8 @@ export default function HandleGlobalError(err: any, req: Request, res: Response,
 
     if (err instanceof AppError) {
         return res.status(err.statusCode).json({
+            success: false,
+            typeError: err.typeError,
             message: err.message
         });
     }
@@ -12,6 +14,7 @@ export default function HandleGlobalError(err: any, req: Request, res: Response,
     console.error(err.message);
 
     return res.status(500).json({
+        success: false,
         message: "Internal Server Error"
     });
 

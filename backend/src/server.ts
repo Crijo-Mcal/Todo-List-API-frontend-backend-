@@ -3,11 +3,12 @@ import dotenv from "dotenv";
 import login_route from "./routes/login.route.js"
 import singUp_route from "./routes/singUp.route.js"
 import globalErrorHandles from "./middleware/globalErrorHandles.js";
-
+import cors from "cors";
 
 dotenv.config();
-const app = express();
 const poth = process.env.BACKEND_PORTH || 3000;
+const app = express();
+app.use(cors());
 
 app.use(express.json());
 

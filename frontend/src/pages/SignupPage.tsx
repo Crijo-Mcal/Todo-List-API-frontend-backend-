@@ -10,8 +10,19 @@ import {
   CardFooter,
 } from "../components/ui/Card";
 import {CheckSquare} from "lucide-react";
+import {useState} from "react";
+import {useSingUp} from "../hooks/useSingUp";
 
 function SignupPage() {
+  const {err, resister} = useSingUp();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
+  function handleSubmit() {
+    resister(name, email, password);
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -33,25 +44,37 @@ function SignupPage() {
 
           <CardContent className="space-y-4">
             <Input
+              error={err?.name}
               id="name"
               type="text"
               label="Full name"
               placeholder="Enter your name"
               autoComplete="name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <Input
+              error={err?.email}
               id="email"
               type="email"
               label="Email"
               placeholder="Enter your email"
               autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
+              error={err?.password}
               id="password"
               type="password"
               label="Password"
               placeholder="Create a password"
               autoComplete="new-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <p className="text-xs text-muted-foreground">
@@ -60,11 +83,9 @@ function SignupPage() {
           </CardContent>
 
           <CardFooter className="flex-col gap-4">
-            <Link to="/dashboard" className="w-full">
-              <Button className="w-full" size="lg">
-                Create account
-              </Button>
-            </Link>
+            <Button onClick={handleSubmit} className="w-full" size="lg">
+              Create account
+            </Button>
 
             <p className="text-center text-xs text-muted-foreground">
               By creating an account, you agree to our{" "}

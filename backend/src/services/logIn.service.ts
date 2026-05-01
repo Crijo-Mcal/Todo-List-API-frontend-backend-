@@ -3,7 +3,7 @@ import logIn from "../db/login-SingUp/logIn.js";
 import { createAccessToken, createRefreshToken } from "../utility/jwtToken.js";
 import { insert_RefreshToken, update_RefreshToken, isRefreshTokenExist } from "../db/login-SingUp/insert_RefreshToken.js";
 
-export default async function singUpService(email: string, password: string): Promise<object> {
+export default async function logInService(email: string, password: string): Promise<object> {
 
     try {
         const client = await logIn(email, password)
@@ -19,7 +19,9 @@ export default async function singUpService(email: string, password: string): Pr
         }
 
 
-        return { AccessToken, RefreshToken, user: { id: client.id, name: client.name, email: client.email } }
+        return {
+            AccessToken, RefreshToken, success: true, user: { id: client.id, name: client.name, email: client.email }
+        }
     } catch (err: any) {
         throw err;
     }
