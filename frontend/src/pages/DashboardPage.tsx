@@ -58,7 +58,11 @@ function DashboardPage() {
       )}
 
       {/* Sidebar */}
-      <SideBar User={User} />
+      <SideBar
+        User={User}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       {/* Main content */}
       <main className="flex-1">
         {/* Top header */}

@@ -1,8 +1,6 @@
 import {Link} from "react-router-dom";
 import {CheckSquare, Home, LogOut, X} from "lucide-react";
-import {useState} from "react";
 import {cn} from "../lib/utils";
-
 import type {User} from "../types/logIn.singUp.type";
 
 type UserInfo = {
@@ -12,16 +10,17 @@ type UserInfo = {
 
 type Props = {
   User: UserInfo | null;
+  sidebarOpen: boolean;
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function SideBar({User}: Props) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+export default function SideBar({User, sidebarOpen, setSidebarOpen}: Props) {
   const Userdata = User?.dataUser;
 
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border bg-card transition-transform duration-300 lg:static lg:translate-x-0",
+        "fixed inset-y-0 lg:h-screen left-0 z-50 flex w-64 flex-col border-r border-border bg-card transition-transform duration-300 lg:sticky lg:translate-x-0",
         sidebarOpen ? "translate-x-0" : "-translate-x-full",
       )}
     >
