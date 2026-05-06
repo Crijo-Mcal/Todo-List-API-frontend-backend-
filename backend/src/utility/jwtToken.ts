@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { type JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { randomBytes } from "crypto";
 dotenv.config();
@@ -24,8 +24,9 @@ export function createRefreshToken(): string {
     return refreshToken;
 }
 
+
+
 export function checkAccessToken(accessToken: string) {
-    const result = jwt.verify(accessToken, secretKey)
-    if (result) return true
-    return false
+    const decoded = jwt.verify(accessToken, secretKey);
+    return decoded
 }

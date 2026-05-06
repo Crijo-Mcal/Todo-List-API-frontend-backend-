@@ -10,8 +10,6 @@ export function useLogin() {
     const navigate = useNavigate();
     const { setUser } = useUserContext();
 
-
-
     type ErrState = {
         email: string | undefined,
         password: string | undefined
@@ -41,7 +39,6 @@ export function useLogin() {
 
             const res = await logIng(email, password);
 
-            console.log(res);
 
             /* validation db */
             if (!res?.success) {

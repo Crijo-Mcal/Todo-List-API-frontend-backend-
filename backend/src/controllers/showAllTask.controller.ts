@@ -5,10 +5,8 @@ export default async function taskController(req: Request, res: Response, next: 
 
     try {
 
-        const accessToken = req.headers.authorization?.split(' ')[1] || "default";
         const { id } = req.body
-
-        const result = await showAllTaskService(id, accessToken)
+        const result = await showAllTaskService(id)
 
         return res.status(200).json(result);
 

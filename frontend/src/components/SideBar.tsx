@@ -1,12 +1,7 @@
 import {Link} from "react-router-dom";
 import {CheckSquare, Home, LogOut, X} from "lucide-react";
 import {cn} from "../lib/utils";
-import type {User} from "../types/logIn.singUp.type";
-
-type UserInfo = {
-  AccessToken: string;
-  dataUser: User;
-};
+import type {UserInfo} from "../context/userContext";
 
 type Props = {
   User: UserInfo | null;

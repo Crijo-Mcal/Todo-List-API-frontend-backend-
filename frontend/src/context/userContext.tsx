@@ -1,7 +1,7 @@
 import {createContext, useContext, useState} from "react";
 import type {User} from "../types/logIn.singUp.type";
 
-type UserInfo = {
+export type UserInfo = {
   AccessToken: string;
   dataUser: User;
 };

@@ -1,25 +1,15 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Input} from "../components/ui/Input";
 import {Button} from "../components/ui/Button";
 import {TodoItem} from "../components/ui/TodoItem";
 import {Plus, Menu, ListTodo} from "lucide-react";
 
 import {useDashboardPage} from "../hooks/useDashboardPage";
-import SideBar from "../components/sideBar";
-
-// Sample todo data for UI demonstration
-const sampleTodos = [
-  {id: "1", title: "Review project requirements", completed: true},
-  {id: "2", title: "Design dashboard wireframes", completed: true},
-  {id: "3", title: "Implement authentication flow", completed: false},
-  {id: "4", title: "Write unit tests for components", completed: false},
-  {id: "5", title: "Deploy to production", completed: false},
-];
+import SideBar from "../components/SideBar";
 
 function DashboardPage() {
-  const {User} = useDashboardPage();
+  const {User, todos, setTodos, fetchTasks} = useDashboardPage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [todos, setTodos] = useState(sampleTodos);
   const [newTodo, setNewTodo] = useState("");
 
   const handleToggle = (id: string) => {
@@ -43,6 +33,10 @@ function DashboardPage() {
       setNewTodo("");
     }
   };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const completedCount = todos.filter((t) => t.completed).length;
   const totalCount = todos.length;

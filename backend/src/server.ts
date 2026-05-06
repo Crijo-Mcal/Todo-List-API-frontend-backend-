@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import login_route from "./routes/login.route.js"
 import singUp_route from "./routes/singUp.route.js"
 import globalErrorHandles from "./middleware/globalErrorHandles.js";
-import showAllTask from "./routes/showAllTask.route.js"
+import showAllTasks from "./routes/showAllTasks.route.js"
 import cors from "cors";
 
 dotenv.config();
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 /* routes */
 app.use('/', login_route);
 app.use('/', singUp_route);
-app.use('/', showAllTask);
+app.use('/', showAllTasks);
 
 
 /* haldle Global Error */
