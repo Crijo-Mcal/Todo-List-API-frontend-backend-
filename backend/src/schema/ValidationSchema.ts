@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+
+export const emailSchema = z.object({
+    email: z.string().email("required Email"),
+})
+
+
 export const singUpValidationSchema = z.object({
     name: z.string().min(4, "name must be more tham 4 charanter"),
     email: z.string().email("required Email"),

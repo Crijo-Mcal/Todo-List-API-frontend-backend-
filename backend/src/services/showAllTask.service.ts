@@ -1,4 +1,4 @@
-import { checkAccessToken } from '../utility/jwtToken.js'
+import { checkAccessToken } from '../utility/token.js'
 import { AppError } from '../error/AppError.js'
 import { selectAllTask } from '../db/task.js'
 

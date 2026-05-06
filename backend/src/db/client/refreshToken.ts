@@ -7,13 +7,13 @@ export async function insert_RefreshToken(token: string, clienID: number): Promi
     );
 }
 
-export async function isRefreshTokenExist(clienID: number): Promise<boolean> {
+export async function isRefreshTokenExist(clienID: number) {
     const res = await pool.query(
         "SELECT token FROM refreshtoken WHERE client_id=$1",
         [clienID]
     )
-    if (res) return true
-    return false
+    if (res) return res.rows[0]
+    return undefined
 }
 
 

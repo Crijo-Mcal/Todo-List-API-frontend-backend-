@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express"
-import { checkAccessToken } from '../../utility/jwtToken.js'
+import { checkAccessToken } from '../../utility/token.js'
 import { error } from "console";
 
 export default function accessTokenValidation(req: Request, res: Response, next: NextFunction) {

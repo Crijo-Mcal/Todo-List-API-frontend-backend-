@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from "express"
 
 
-export default function showAllTaskValidation(req: Request, res: Response, next: NextFunction) {
+export default function idValidation(req: Request, res: Response, next: NextFunction) {
 
     try {
 
-        if (!req.body.id) {
+        if (!req.body) {
             throw new Error("required id")
         }
 
